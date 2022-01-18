@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesWebMvc.Services
 {
@@ -15,9 +16,9 @@ namespace SalesWebMvc.Services
         {
             _context = context;
         }
-        public List<Department> FindAll()
+        public async Task<List<Department>> FindAllAsync() // esse método está assincrono (ele funcionará sem que a aplicação seja interrompida para sua execução)
         {
-            return _context.Department.OrderBy(x => x.Name).ToList();
+            return await _context.Department.OrderBy(x => x.Name).ToListAsync(); // expressão lambda com uma chamada assincrona tbm
         }
     }
 }
